@@ -1,10 +1,39 @@
 import { INodeType, INodeTypeDescription } from 'n8n-workflow';
+import { attachmentDescription } from './AttachmentDescription';
+import { commentDescription } from './CommentDescription';
+import { taskDescription } from './TaskDescription';
 
 
-export class MeisterTaskNode implements INodeType {
+export class MeisterTask implements INodeType {
 	description: INodeTypeDescription = {
-		// Basic node details will go here
+		// General description
+		displayName: 'MeisterTask',
+		name: 'meisterTask',
+		icon: 'file:meistertask.svg',
+		group: [],
+		inputs: ['main'],
+		outputs: ['main'],
+		version: 0,
+		subtitle: '={{ $parameter["operation"] + ": " + $parameter["resource"] }}',
+		description: 'Accesses the MeisterTask API',
+		// Credentials
+		credentials: [{
+			name: 'meisterTaskApi',
+			required: true,
+		}],
+		// Default API URL
+		requestDefaults: {
+			baseURL: 'https://www.meistertask.com/api',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+		},
+		defaults: {
+			name: 'MeisterTask',
+		},
 		properties: [{
+			// Ressources: tasks, attachments and comments
 			displayName: 'Resource',
 			name: 'resource',
 			type: 'options',
@@ -13,72 +42,17 @@ export class MeisterTaskNode implements INodeType {
 				name: 'Task',
 				value: 'tasks',
 			}, {
+				name: 'Comment',
+				value: 'comments',
+			}, {
 				name: 'Attachment',
 				value: 'attachments',
 			}],
 			default: 'tasks',
-		}, {
-			displayName: 'Operation',
-			name: 'operation',
-			type: 'options',
-			noDataExpression: true,
-			displayOptions: {
-				show: {
-					resource: [
-						'tasks',
-					],
-				},
-			},
-			options: [{
-				name: 'Get',
-				value: 'get',
-				action: 'Get a task',
-				description: 'Get a task by its ID',
-				routing: {
-					request: {
-						method: 'GET',
-						url: '=/api/tasks/{{$parameter.id}}',
-					},
-				},
-			}],
-			default: 'get',
-		}, {
-			displayName: 'Task ID',
-			description: 'Choose which task to get',
-			required: true,
-			name: 'id',
-			type: 'number',
-			default: 0,
-			displayOptions: {
-				show: {
-					resource: [
-						'tasks',
-					],
-				},
-			},
-		}],
-		credentials: [{
-			name: 'meisterTaskApi',
-			required: true,
-		}],
-		requestDefaults: {
-			baseURL: 'https://www.meistertask.com/api',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json',
-			},
 		},
-		inputs: ['main'],
-		outputs: ['main'],
-		displayName: 'MeisterTask',
-		name: 'MeisterTask',
-		subtitle: '={{ $parameter["operation"] + ": " + $parameter["resource"] }}',
-		icon: 'file:meistertask.svg',
-		group: [],
-		version: 0,
-		description: 'Accesses the MeisterTask API',
-		defaults: {
-			name: 'MeisterTask',
-		},
+		...taskDescription,
+		...commentDescription,
+		...attachmentDescription,
+		],
 	};
 }

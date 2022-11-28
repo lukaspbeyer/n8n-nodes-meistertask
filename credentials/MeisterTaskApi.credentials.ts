@@ -12,8 +12,8 @@ export class MeisterTaskApi implements ICredentialType {
 	documentationUrl = 'https://docs.n8n.io/integrations/creating-nodes/build/declarative-style-node/';
 	properties: INodeProperties[] = [
 		{
-			displayName: 'API Key',
-			name: 'apiKey',
+			displayName: 'Token',
+			name: 'token',
 			type: 'string',
 			typeOptions: { password: true },
 			default: '',
@@ -23,7 +23,7 @@ export class MeisterTaskApi implements ICredentialType {
 		type: 'generic',
 		properties: {
 			headers: {
-				'Authorization': 'Bearer {{$credentials.apiKey}}',
+				'Authorization': '={{"Bearer " + $credentials.token}}',
 			},
 		},
 	};

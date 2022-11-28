@@ -1,13 +1,15 @@
 npm run lint(fix)
 
+# Test node locally
+
 When you are ready to test your node locally
 
-# In your node directory
+## In your node directory
 
-npm run build
-npm link
+> npm run build
+> npm link
 
-# In your n8n directory
+## In your n8n directory
 
-cd ~/node_modules/n8n
-npm link n8n-nodes-meistertask
+> cd /usr/local/lib/node_modules
+> npm link n8n-nodes-meistertask
