@@ -59,7 +59,7 @@ export const attachmentOperations: INodeProperties[] = [{
 							throw new NodeOperationError(
 								this.getNode(),
 								`No binary data property "${binaryPropertyName}" does exist on item!`, {
-								itemIndex: this.getItemIndex()
+								itemIndex: this.getItemIndex(),
 							});
 						}
 
