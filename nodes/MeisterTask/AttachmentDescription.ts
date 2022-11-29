@@ -85,7 +85,7 @@ export const attachmentOperations: INodeProperties[] = [{
 
 						// Set the headers
 						//if (!requestOptions.headers) requestOptions.headers = {};
-						//requestOptions.headers = body.getHeaders();
+						requestOptions.headers = body.getHeaders();
 
 						// Return the request data
 						requestOptions.body = body;

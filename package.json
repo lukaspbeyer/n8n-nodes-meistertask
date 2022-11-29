@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-meistertask",
-  "version": "0.5.5",
+  "version": "0.6.0",
   "description": "n8n node to call the MeisterTask API",
   "keywords": [
     "n8n-community-node-package"
